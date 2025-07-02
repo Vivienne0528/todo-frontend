@@ -15,9 +15,11 @@ export default function RegisterPage() {
             });
             alert(res.data.message); // "User registered successfully"
             router.push('/'); // 跳转到登录页
-        } catch (err: any) {
-            alert(err.response?.data?.message || 'Register failed');
-            console.error(err);
+        } catch (err) {
+            if (axios.isAxiosError(err)) {
+                alert(err.response?.data?.message || 'Register failed');
+                console.error(err);
+            }
         }
     };
 
