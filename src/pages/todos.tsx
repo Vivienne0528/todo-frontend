@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axiosInstance from '../utils/axiosInstance';
+import axios from 'axios';
 
 interface Todo {
     _id: string;
@@ -19,16 +20,19 @@ export default function TodosPage() {
             try {
                 const res = await axiosInstance.get('/todos');
                 setTodos(res.data);
-            } catch (err: any) {
-                if (err.response?.status === 401 || err.response?.status === 403) {
-                    router.push('/');
+            } catch (err) {
+                if (axios.isAxiosError(err)) {
+                    if (err.response?.status === 401 || err.response?.status === 403) {
+                        router.push('/');
+                    }
                 } else {
                     console.error(err);
                 }
             }
+
         };
         fetchTodos();
-    }, []);
+    }, [router]);
 
     // 添加 Todo
     const handleAdd = async () => {
