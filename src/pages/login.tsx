@@ -9,7 +9,7 @@ export default function LoginPage() {
 
     const handleLogin = async () => {
         try {
-            const res = await axios.post('https://todo-backend-6ed0.onrender.com/', {
+            const res = await axios.post('https://todo-backend-6ed0.onrender.com/auth/login', {
                 username,
                 password: pwd,
             });
