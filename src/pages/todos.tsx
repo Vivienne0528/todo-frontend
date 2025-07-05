@@ -85,6 +85,7 @@ export default function TodosPage() {
                     </li>
                 ))}
             </ul>
+            <button className='bg-pink-500 p-1 mt-1'>checkout</button>
         </div>
     );
 }
